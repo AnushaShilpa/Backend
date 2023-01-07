@@ -5,7 +5,7 @@ const fs = require('fs')
 const server=http.createServer((req ,res)=>
 {
     res.writeHead(200,{'content-Type':'text/html'})
-    fs.readFile('new.html',function(error ,data)
+    fs.readFile('ne.html',function(error ,data)
     {
       if(error)
       {
