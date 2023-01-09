@@ -1,22 +1,28 @@
 
 const http = require('http');
-const fs = require('fs')
+const fs = require('fs');
 
 const server=http.createServer((req ,res)=>
 {
-    res.writeHead(200,{'content-Type':'text/html'})
-    fs.readFile('ne.html',function(error ,data)
+  const url= req.url;
+  const method=req.method;
+  if(url==='/')
+  {
+    res.write('<html>')
+    res.write('<head><title>HELLO EVERY ONE</title></head>')
+    res.write('<body>')
+    res.write('<form action ="/message" method="POST"><input type="text" name="message"><button type="submit">Send</button></form>')
+    res.write('</body>')
+    res.write('</html>')
+     return res.end();
+  }
+  
+  if(url==='/message' && method ==='POST')
     {
-      if(error)
-      {
-        res.writeHead(404)
-        res.write("Error:File not found")
-      }
-      else{
-        res.write(data)
-      }
-      res.end()
-    })
-});
-
+      fs.writeFileSync('message.txt','Dummy');
+      res.statusCode =302;
+      res.setHeader('Location','/')
+      return res.end()
+    }
+})
 server.listen(4000);
