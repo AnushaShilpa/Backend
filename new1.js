@@ -8,9 +8,13 @@ const port =4000
 app.use(bodyparser.urlencoded({executable:false}))
 app.use('/add-product',(req,res,next)=>
 {
-  res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add product</button></form>')
-})
-app.post('/product',(req,res,next)=>
+  
+  res.send('<form action="/product" method="POST"><input type="text" name="title"/> <input type="number" name="size"/><button type="submit">Add product</button></form>')
+  
+
+});
+
+app.use('/product',(req,res,next)=>
 {
   console.log(req.body);
   res.redirect('/');
